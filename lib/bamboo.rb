@@ -1,4 +1,5 @@
 require "bamboo/version"
+require "bamboo/crawler"
 require 'json'
 require "net/http"
 
@@ -25,7 +26,7 @@ class Bamboo
     puts "=====>Request Status<====="
     puts "STATUS: #{response.code}"
     puts "BODY  : #{response.body}"
-    return response.code, response.body.to_json
+    return Crawler.new(response.code, response.body)
   end
 
   def method_missing(name, *args)

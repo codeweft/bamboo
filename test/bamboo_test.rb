@@ -6,8 +6,8 @@ class BambooTest < Minitest::Test
   end
 
   def test_if_correct_status_code
-    client = Bamboo.new("bamboo.host.com", "8085", ENV['BAMBOO_USERNAME'], ENV['BAMBOO_PASSWORD'])
-    status, body = client.latest.result("PROECT_CODE").latest.get
-    assert(status == '200', "Received Status #{status}, Expected Status: 200")
+    client = Bamboo.new( ENV['BAMBOO_HOST'], ENV['BAMBOO_PORT'], ENV['BAMBOO_USERNAME'], ENV['BAMBOO_PASSWORD'])
+    latest = client.latest.result(ENV['BAMBOO_PROJECT_CODE']).latest.get
+    assert(latest.status == '200', "Received Status #{latest.status}, Expected Status: 200")
   end
 end
